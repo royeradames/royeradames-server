@@ -11,7 +11,7 @@ import { DeleteResult } from "typeorm";
 import { CreateTutorialDto, TechnologyDto } from "./tutorial.dto";
 import { NotesNav, TutorialService } from "./tutorial.service";
 
-@Controller("tutorial")
+@Controller("tutorials")
 export class TutorialController {
   constructor(private reportService: TutorialService) {}
 
@@ -21,11 +21,11 @@ export class TutorialController {
     return this.reportService.createTutorial(createTutorialDto);
   }
 
-  @Get("/:technology")
-  async findTutorials(
+  @Get("navigation/:technology")
+  async findTutorialTechnologyNavigation(
     @Param("technology") technology: TechnologyDto["technology"]
   ): Promise<NotesNav[]> {
-    return await this.reportService.findTutorials(technology);
+    return await this.reportService.findNav(technology);
   }
 
   @Delete("/:tutorialId")

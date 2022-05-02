@@ -6,6 +6,7 @@ import { CreateTutorialDto, Technology } from "./tutorial.dto";
 import { tutorial } from "./tutorial.entity";
 
 export interface NotesNav {
+  id: number;
   link: string;
   name: string;
   chapter?: string;
@@ -38,7 +39,7 @@ export class TutorialService {
     }
   }
 
-  async findTutorials(technology: Technology): Promise<NotesNav[]> {
+  async findNav(technology: Technology): Promise<NotesNav[]> {
     let previousChapter = "";
     let chapterNumber = 1;
     const alphabetStart = 64;
@@ -56,6 +57,7 @@ export class TutorialService {
       const alphabetLetter = decoder.decode(new Uint8Array([++utfLetter]));
 
       const nav: NotesNav = {
+        id: note.id,
         link: "/" + note.domainPath,
         name: `${alphabetLetter}. ${note.section}`,
         chapter: isNewChapter ? note.chapter : undefined,
