@@ -77,7 +77,6 @@ export class TutorialService {
   }
 
   createTutorial(createTutorialDto: CreateTutorialDto): Promise<tutorial> {
-    console.log("createTutorialDto", createTutorialDto);
     const tutorial = this.tutorialRepo.create(createTutorialDto);
     return this.tutorialRepo.save(tutorial);
   }

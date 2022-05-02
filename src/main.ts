@@ -13,6 +13,7 @@ async function bootstrap() {
       whitelist: true,
     })
   );
+  process.env.NODE_ENV === "development" ? app.enableCors({ origin: "*" }) : "";
   await app.listen(process.env.PORT || 3001);
 }
 bootstrap();
