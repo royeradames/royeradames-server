@@ -9,6 +9,7 @@ import {
 } from "@nestjs/common";
 import { DeleteResult } from "typeorm";
 import { CreateTutorialDto, TechnologyDto } from "./tutorial.dto";
+import { tutorial } from "./tutorial.entity";
 import { NotesNav, TutorialService } from "./tutorial.service";
 
 @Controller("tutorials")
@@ -46,5 +47,12 @@ export class TutorialController {
       chapter,
       title,
     });
+  }
+
+  @Get(":id")
+  async findOneTutorialById(
+    @Param("id", ParseIntPipe) id: number
+  ): Promise<tutorial> {
+    return await this.reportService.findOneTutorialById(id);
   }
 }

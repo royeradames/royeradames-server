@@ -21,6 +21,9 @@ interface FindOneTutorial {
 
 @Injectable()
 export class TutorialService {
+  findOneTutorialById(id: number): Promise<tutorial> {
+    return this.tutorialRepo.findOne(id);
+  }
   constructor(
     @InjectRepository(tutorial) private tutorialRepo: Repository<tutorial>
   ) {}
