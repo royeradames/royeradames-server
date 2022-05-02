@@ -16,7 +16,8 @@ export class TutorialController {
   constructor(private reportService: TutorialService) {}
 
   @Post()
-  async createReport(@Body() createTutorialDto: CreateTutorialDto) {
+  async createTutorial(@Body() createTutorialDto: CreateTutorialDto) {
+    console.log("createTutorial");
     return this.reportService.createTutorial(createTutorialDto);
   }
 

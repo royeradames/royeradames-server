@@ -19,9 +19,6 @@ export class tutorial {
   markdown: string;
 
   @Column()
-  editPath: string;
-
-  @Column()
   aPath: string;
 
   @Column()
