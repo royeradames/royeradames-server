@@ -22,7 +22,7 @@ export class TutorialController {
     return this.reportService.createTutorial(createTutorialDto);
   }
 
-  @Get("navigation/:technology")
+  @Get(":technology/navigation")
   async findTutorialTechnologyNavigation(
     @Param("technology") technology: TechnologyDto["technology"]
   ): Promise<NotesNav[]> {

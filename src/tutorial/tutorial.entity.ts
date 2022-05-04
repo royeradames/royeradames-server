@@ -21,8 +21,8 @@ export class tutorial {
   @Column()
   aPath: string;
 
-  @Column()
-  bPath: string;
+  @Column({ nullable: true })
+  bPath?: string;
 
   @Column()
   technology: Technology;
