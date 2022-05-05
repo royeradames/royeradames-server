@@ -1,16 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Technology } from "./tutorial.dto";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { ChaptersEntity } from "./chapters.entity";
+import { Technology } from "./dto/tutorial.dto";
 
-@Entity("tutorial")
-export class tutorial {
+@Entity("tutorials")
+export class TutorialsEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  chapter: string;
+  section: string;
 
   @Column()
-  section: string;
+  sectionOrder: number;
 
   @Column()
   domainPath: string;
@@ -26,4 +27,10 @@ export class tutorial {
 
   @Column()
   technology: Technology;
+
+  @Column()
+  chapterId: number;
+
+  @ManyToOne(() => ChaptersEntity, (chapter) => chapter.tutorials)
+  chapter: ChaptersEntity;
 }

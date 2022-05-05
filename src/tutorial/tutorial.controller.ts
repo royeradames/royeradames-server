@@ -8,9 +8,10 @@ import {
   Post,
 } from "@nestjs/common";
 import { DeleteResult } from "typeorm";
-import { CreateTutorialDto, TechnologyDto } from "./tutorial.dto";
-import { tutorial } from "./tutorial.entity";
-import { NotesNav, TutorialService } from "./tutorial.service";
+import { CreateChapterDto } from "./dto/chapters.dto";
+import { CreateTutorialDto, TechnologyDto } from "./dto/tutorial.dto";
+import { TutorialsEntity } from "./tutorial.entity";
+import { TableOfContentInterface, TutorialService } from "./tutorial.service";
 
 @Controller("tutorials")
 export class TutorialController {
@@ -18,15 +19,21 @@ export class TutorialController {
 
   @Post()
   async createTutorial(@Body() createTutorialDto: CreateTutorialDto) {
-    console.log("createTutorial");
+    // console.log("createTutorial");
     return this.reportService.createTutorial(createTutorialDto);
   }
 
-  @Get(":technology/navigation")
+  @Post("chapter")
+  async createChapter(@Body() createChapterDto: CreateChapterDto) {
+    return this.reportService.createChapter(createChapterDto);
+  }
+
+  @Get(":technology/table-of-contents")
   async findTutorialTechnologyNavigation(
     @Param("technology") technology: TechnologyDto["technology"]
-  ): Promise<NotesNav[]> {
-    return await this.reportService.findNav(technology);
+  ) {
+    // : Promise<TableOfContentInterface[]>
+    return await this.reportService.tableOfContent(technology);
   }
 
   @Delete("/:tutorialId")
@@ -52,7 +59,7 @@ export class TutorialController {
   @Get(":id")
   async findOneTutorialById(
     @Param("id", ParseIntPipe) id: number
-  ): Promise<tutorial> {
+  ): Promise<TutorialsEntity> {
     return await this.reportService.findOneTutorialById(id);
   }
 }

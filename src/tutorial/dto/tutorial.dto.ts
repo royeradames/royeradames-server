@@ -1,4 +1,4 @@
-import { IsString, IsIn } from "class-validator";
+import { IsString, IsIn, IsNumber } from "class-validator";
 
 export type Technology =
   | "angular"
@@ -20,6 +20,9 @@ export class CreateTutorialDto extends TechnologyDto {
 
   @IsString()
   section: string;
+
+  @IsNumber()
+  sectionOrder: number;
 
   @IsString()
   domainPath: string;
